@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>EChat Bot</title>
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="static/index.css">
+</head>
+
+<body>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<div id="container">
+		<aside>
+			<header>
+				<input type="text" class="text-input" placeholder="search conversations">
+				<button class="flat-button">new</button>
+			</header>
+			<ul>
+				<li id="10" class="">
+					<img src="static/image/conversation_icon.png" alt="">
+					<div>
+						<h2>New Conversation</h2>
+					</div>
+			</li>
+			<li id="10" class="">
+				<img src="static/image/conversation_icon.png" alt="">
+				<div>
+					<input type="text" class="text-input" value="New Conversation">
+				</div>
+		</li>
+			</ul>
+		</aside>
+		<main>
+			<header>
+				<img src="static/image/bot_icon.png" alt="">
+				<div>
+					<h2>Chat with AI bot</h2>
+				</div>
+				<button class="close-button">X</button>
+			</header>
+			<ul id="chat">
+				<li class="bot">
+					<div class="entete">
+						<span class="status green"></span>
+						<h2>Vincent</h2>
+						<h3>10:12AM, Today</h3>
+					</div>
+					<div class="message">
+						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+					</div>
+				</li>
+				<li class="user">
+					<div class="entete">
+						<h3>10:12AM, Today</h3>
+						<h2>Vincent</h2>
+						<span class="status blue"></span>
+					</div>
+					<div class="message">
+						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+					</div>
+				</li>
+				
+			</ul>
+			<footer>
+				<textarea id="message-textarea" placeholder="Type your message"></textarea>
+				<button id="send-button">
+					<svg  xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+						<path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+					</svg>
+				</button>
+			</footer> 
+		</main>
+	</div>
+	<script src="static/js/main.js"></script>
+</body>
+
+</html>
