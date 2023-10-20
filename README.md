@@ -1,6 +1,6 @@
 # Chatbot Web Application
 
-This is a repository for a Chatbot Web Application, which provides an interactive and automated conversational interface to users.
+This is a repository for a Chatbot Web Application, which provides an interactive and automated conversational interface to users. This is a redo of an application I made with Django.
 
 ## Features
 
