@@ -1,16 +1,15 @@
 use core::prelude::rust_2015;
 use std::fmt::Display;
 
-use actix_web::{HttpResponse, body::BoxBody};
+use actix_web::{body::BoxBody, HttpResponse};
 
 #[derive(Debug)]
-pub enum Error
-{
-	RusqliteError(rusqlite::Error)
+pub enum Error {
+    RusqliteError(rusqlite::Error),
 }
 impl Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-		todo!()
+        todo!()
     }
 }
 impl actix_web::ResponseError for Error {
@@ -25,11 +24,8 @@ impl actix_web::ResponseError for Error {
     }
 }
 
-impl From<rusqlite::Error> for Error
-{
+impl From<rusqlite::Error> for Error {
     fn from(value: rusqlite::Error) -> Self {
         Error::RusqliteError(value)
     }
 }
-
-

@@ -1,15 +1,13 @@
-use actix_web::{Responder, body::BoxBody, HttpResponse};
-use rusqlite::params;
 use crate::models;
+use actix_web::{body::BoxBody, HttpResponse, Responder};
 use models::Message;
+use rusqlite::params;
 
 #[derive(serde::Deserialize, serde::Serialize)]
-pub struct Conversation
-{
-	pub id: i32,
-	pub created_at: String,
-	pub name: String,
-
+pub struct Conversation {
+    pub id: i32,
+    pub created_at: String,
+    pub name: String,
 }
 
 impl Responder for Conversation {
@@ -33,14 +31,13 @@ impl Conversation {
         let created_at: String = row.get(1)?;
 
         Ok(Conversation {
-			id: row.get(0)?,
-			created_at,
-			name: row.get(2)?
-		})
+            id: row.get(0)?,
+            created_at,
+            name: row.get(2)?,
+        })
     }
 
-    pub fn get_all() -> Result<Vec<Self>, crate::Error>
-    {
+    pub fn get_all() -> Result<Vec<Self>, crate::Error> {
         let conn = models::db().get_connection();
 
         let mut statement = conn.prepare(
@@ -50,7 +47,7 @@ impl Conversation {
         )?;
 
         let rows = statement.query_map([], |row| {
-			let created_at: String = row.get(1)?;
+            let created_at: String = row.get(1)?;
             Ok(Self {
                 id: row.get(0)?,
                 created_at,
@@ -58,34 +55,37 @@ impl Conversation {
             })
         })?;
         let mut result = Vec::new();
-        for row in rows
-        {
+        for row in rows {
             result.push(row?)
         }
 
         Ok(result)
     }
 
-    pub fn new(name : String) -> Result<Self, crate::Error>
-    {
+    pub fn new(name: String) -> Result<Self, crate::Error> {
         let conn = models::db().get_connection();
-        let mut statement = conn.prepare("
+        let mut statement = conn.prepare(
+            "
             INSERT INTO conversations (name)
             VALUES (?)
-        ")?;
+        ",
+        )?;
 
         let rowid = statement.insert(params![name])?;
-        let new_conv = conn.query_row("select * from conversations where rowid=?", params![rowid], |row|{
-            let created_at: String = row.get(1)?;
-            Ok(Self
-            {
-                id: row.get(0)?,
-                created_at,
-                name: row.get(2)?,
-            })
-        });
-        new_conv.map_err(|x|x.into())
-    } 
+        let new_conv = conn.query_row(
+            "select * from conversations where rowid=?",
+            params![rowid],
+            |row| {
+                let created_at: String = row.get(1)?;
+                Ok(Self {
+                    id: row.get(0)?,
+                    created_at,
+                    name: row.get(2)?,
+                })
+            },
+        );
+        new_conv.map_err(|x| x.into())
+    }
     pub fn save(&self) -> Result<(), crate::Error> {
         let conn = models::db().get_connection();
 
@@ -94,16 +94,12 @@ impl Conversation {
              VALUES (?, ?, ?)",
         )?;
 
-        statement.execute(params![
-            self.id,
-            self.created_at,
-            self.name,
-        ])?;
-        
+        statement.execute(params![self.id, self.created_at, self.name,])?;
+
         Ok(())
     }
 
-    pub fn delete(id : i32) -> Result<(), crate::Error> {
+    pub fn delete(id: i32) -> Result<(), crate::Error> {
         let conn = models::db().get_connection();
 
         let mut statement = conn.prepare("DELETE FROM conversations WHERE id = ?")?;
@@ -127,7 +123,7 @@ impl Conversation {
         )?;
 
         let rows = statement.query_map(params![self.id], |row| {
-			let created_at: String = row.get(1)?;
+            let created_at: String = row.get(1)?;
             Ok(Message {
                 id: row.get(0)?,
                 created_at,
