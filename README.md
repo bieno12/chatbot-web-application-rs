@@ -31,3 +31,4 @@ Follow these steps to set up the Chatbot Web Application:
 
 Once the Chatbot Web Application is up and running, users can interact with the chatbot through the provided chat interface. They can type messages and press Enter to send them to the chatbot. The chatbot will process the input and generate appropriate responses based on its configuration and training.
 
+![Alt text](./screenshots/meaningless_conversation.png?raw=true "sample Conversation")
